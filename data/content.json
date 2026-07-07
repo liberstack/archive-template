@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "historia-da-web",
+    "title": "História da Web",
+    "file": "article-01.md"
+  },
+  {
+    "slug": "javascript-origens",
+    "title": "JavaScript: Origens e Evolução",
+    "file": "article-02.md"
+  },
+  {
+    "slug": "python-filosofia",
+    "title": "Python: Filosofia e História",
+    "file": "article-03.md"
+  }
+]
