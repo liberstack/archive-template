@@ -57,6 +57,7 @@ function renderFooter() {
 
 async function renderHome() {
   const list = await getContentList();
+  const RECENT_LIMIT = 5;
 
   app.innerHTML = `
     ${renderNavbar()}
@@ -64,6 +65,7 @@ async function renderHome() {
       <h1>${CONFIG.brand.title}</h1>
       <p class="description">${CONFIG.brand.description}</p>
       <input type="text" id="search-input" class="search-input" placeholder="🔍 Pesquisar" />
+      <p class="list-note" id="list-note"></p>
       <ul class="article-list" id="article-list"></ul>
     </main>
     ${renderFooter()}
@@ -71,12 +73,18 @@ async function renderHome() {
 
   const listEl = document.getElementById("article-list");
   const searchInput = document.getElementById("search-input");
+  const listNoteEl = document.getElementById("list-note");
 
-  function renderList(items) {
+  function renderList(items, { isSearch }) {
     if (!items.length) {
       listEl.innerHTML = `<li class="empty">Nenhum resultado encontrado.</li>`;
+      listNoteEl.textContent = "";
       return;
     }
+
+    listNoteEl.textContent = isSearch
+      ? ""
+      : `Mostrando os ${Math.min(items.length, RECENT_LIMIT)} artigos mais recentes.`;
 
     listEl.innerHTML = items
       .map(
@@ -92,10 +100,16 @@ async function renderHome() {
       .join("");
   }
 
-  renderList(list);
+  renderList(list.slice(0, RECENT_LIMIT), { isSearch: false });
 
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) {
+      renderList(list.slice(0, RECENT_LIMIT), { isSearch: false });
+      return;
+    }
+
     const filtered = list.filter((item) => {
       const titleMatch = item.title.toLowerCase().includes(query);
       const tagMatch = (item.tags || []).some((tag) =>
@@ -103,7 +117,7 @@ async function renderHome() {
       );
       return titleMatch || tagMatch;
     });
-    renderList(filtered);
+    renderList(filtered, { isSearch: true });
   });
 }
 
