@@ -1,7 +1,7 @@
 {
-  "name": "wiki-archive",
+  "name": "devlore",
   "version": "1.0.0",
-  "description": "Arquivo digital estático de artigos, construído com HTML, CSS e JavaScript puro. Sem build, sem framework, sem dependências além do marked.js (incluído localmente).",
+  "description": "Histórias e fundamentos por trás das tecnologias que usamos. Blog estático construído com HTML, CSS e JavaScript puro. Sem build, sem framework, sem dependências além do marked.js (incluído localmente).",
   "private": true,
   "type": "module",
   "scripts": {
