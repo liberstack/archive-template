@@ -2,16 +2,33 @@
   {
     "slug": "historia-da-web",
     "title": "História da Web",
-    "file": "article-01.md"
+    "file": "article-01.md",
+    "tags": [
+      "web",
+      "html",
+      "história",
+      "internet"
+    ]
   },
   {
     "slug": "javascript-origens",
     "title": "JavaScript: Origens e Evolução",
-    "file": "article-02.md"
+    "file": "article-02.md",
+    "tags": [
+      "javascript",
+      "ecmascript",
+      "node",
+      "história"
+    ]
   },
   {
     "slug": "python-filosofia",
     "title": "Python: Filosofia e História",
-    "file": "article-03.md"
+    "file": "article-03.md",
+    "tags": [
+      "python",
+      "filosofia",
+      "história"
+    ]
   }
 ]

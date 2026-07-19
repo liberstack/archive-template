@@ -150,6 +150,34 @@ a:hover {
   font-style: italic;
 }
 
+.article-list .item-title {
+  display: block;
+}
+
+/* Tags */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tag {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  color: #54595d;
+  background: #f8f9fa;
+  border: 1px solid #eaecf0;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.content.article .tags {
+  margin-bottom: 20px;
+}
+
 /* Article page */
 
 .back-link {

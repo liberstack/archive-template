@@ -12,6 +12,14 @@ async function getContentList() {
   return contentListCache;
 }
 
+function renderTags(tags) {
+  if (!tags || !tags.length) return "";
+
+  const chips = tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+
+  return `<div class="tags">${chips}</div>`;
+}
+
 function renderNavbar() {
   return `
     <header class="navbar">
@@ -55,7 +63,7 @@ async function renderHome() {
     <main class="content">
       <h1>${CONFIG.brand.title}</h1>
       <p class="description">${CONFIG.brand.description}</p>
-      <input type="text" id="search-input" class="search-input" placeholder="Pesquisar por título..." />
+      <input type="text" id="search-input" class="search-input" placeholder="🔍 Pesquisar" />
       <ul class="article-list" id="article-list"></ul>
     </main>
     ${renderFooter()}
@@ -71,7 +79,16 @@ async function renderHome() {
     }
 
     listEl.innerHTML = items
-      .map((item) => `<li><a href="#/${item.slug}">${item.title}</a></li>`)
+      .map(
+        (item) => `
+          <li>
+            <a href="#/${item.slug}">
+              <span class="item-title">${item.title}</span>
+              ${renderTags(item.tags)}
+            </a>
+          </li>
+        `,
+      )
       .join("");
   }
 
@@ -79,9 +96,13 @@ async function renderHome() {
 
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim().toLowerCase();
-    const filtered = list.filter((item) =>
-      item.title.toLowerCase().includes(query),
-    );
+    const filtered = list.filter((item) => {
+      const titleMatch = item.title.toLowerCase().includes(query);
+      const tagMatch = (item.tags || []).some((tag) =>
+        tag.toLowerCase().includes(query),
+      );
+      return titleMatch || tagMatch;
+    });
     renderList(filtered);
   });
 }
@@ -107,11 +128,18 @@ async function renderArticle(slug) {
   const md = await res.text();
   const html = marked.parse(md);
 
+  // Insere o bloco de tags logo depois do primeiro </h1> do markdown renderizado,
+  // para que apareçam como um "subtítulo" do artigo.
+  const tagsBlock = renderTags(entry.tags);
+  const htmlWithTags = html.includes("</h1>")
+    ? html.replace("</h1>", `</h1>${tagsBlock}`)
+    : `${tagsBlock}${html}`;
+
   app.innerHTML = `
     ${renderNavbar()}
     <main class="content article">
       <a href="#/" class="back-link">&larr; Voltar</a>
-      ${html}
+      ${htmlWithTags}
     </main>
     ${renderFooter()}
   `;
