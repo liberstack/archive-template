@@ -84,7 +84,7 @@ async function renderHome() {
 
     listNoteEl.textContent = isSearch
       ? ""
-      : `Mostrando os ${Math.min(items.length, RECENT_LIMIT)} artigos mais recentes.`;
+      : `▼ Os ${Math.min(items.length, RECENT_LIMIT)} últimos artigos`;
 
     listEl.innerHTML = items
       .map(
