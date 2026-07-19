@@ -45,7 +45,7 @@ function renderFooter() {
       <div class="footer-col">
         <h3>Contato</h3>
         <p><a href="mailto:${CONFIG.footer.contact.email}">${CONFIG.footer.contact.email}</a></p>
-        <p><a href="https://wa.me/${CONFIG.footer.contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></p>
+        <p><a href="https://t.me/${CONFIG.footer.contact.whatsapp}" target="_blank" rel="noopener">Telegram</a></p>
       </div>
       <div class="footer-col">
         <h3>Links</h3>
