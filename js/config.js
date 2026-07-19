@@ -1,8 +1,8 @@
 export const CONFIG = {
   brand: {
     title: "#devlore",
-    subtitle: "histórias e fundamentos por trás das tecnologias que usamos",
-    description: "um arquivo digital de artigos e referências.",
+    subtitle: "História e fundamentos das tecnologias JavaScript e Python",
+    description: "Um arquivo digital de artigos e referências.",
   },
 
   footer: {
